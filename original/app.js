@@ -11,10 +11,16 @@ function readJSONFile(filePath) {
 }
 
 function statement(invoice,plays) {
-    let totalAmount = 0;
-    let volumeCredits = 0;
+    let totalAmount = 0; // 총액
+    let volumeCredits = 0; // 적립 포인트
     let result = `::: 청구 내역 (고객명: ${invoice[0].customer}) ::: \n`;
 
+    /**
+     * Intl.NumberFormat ::: 숫자를 다양한 지역 및 통화형식으로 포맷팅하는 JS 내장 객체
+     * style: "currency" ::: 숫자를 통화(화폐)로 지정
+     * currency : "USD" ::: 통화코드 => 달러 지정
+     * minimumFractionDigits: 2 ::: 소수부분 처리 (소수 둘째짜리까지 표시)
+     */
     const format = new Intl.NumberFormat("en-US", {
         style: "currency", currency: "USD",
         minimumFractionDigits: 2
@@ -57,7 +63,7 @@ function statement(invoice,plays) {
 
     result += `----------------------------------\n`;
     result += `총액: ${format(totalAmount / 100)}\n`;
-    result += `적립 포인트: ${volumeCredits}\n`;
+    result += `적립 포인트: ${volumeCredits}점\n`;
     result += `----------------------------------\n`;
     return result;
 }
