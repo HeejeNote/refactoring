@@ -1,3 +1,7 @@
+/**
+ * 공연 관림 비용 계산 부분 함수화
+ */
+
 const fs = require('fs');
 
 function readJSONFile(filePath) {
@@ -22,9 +26,7 @@ function statement(invoice,plays) {
     for (let performance of invoice[0].performances) {
         const play = plays[performance.playID];
 
-        /**
-         * 함수화
-         */
+
         let thisAmount = amountFor(performance, play);
 
         // 포인트를 적립한다.
