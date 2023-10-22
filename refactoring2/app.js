@@ -37,6 +37,7 @@ function statement(invoice) {
 
 /**
  * 총합 공연 관람 비용 계산 함수
+ * @returns {number}
  */
 function totalAmount(){
     let result = 0;
@@ -47,7 +48,8 @@ function totalAmount(){
 }
 
 /**
- * 총합 적립포인트 계산 함수
+ * 총합 적립 포인트 계산 함수
+ * @returns {number}
  */
 function totalVolumeCredits(){
     let result = 0;
@@ -72,7 +74,7 @@ function usd(aNumber) {
 
 /**
  * 적립 포인트 계산 함수
- * @param performance
+ * @param aPerformance
  * @returns {number}
  */
 function volumeCreditsFor(aPerformance) {
@@ -90,7 +92,7 @@ function volumeCreditsFor(aPerformance) {
 
 /**
  * 공연 ID 추출 함수
- * @param performance
+ * @param aPerformance
  * @returns {*}
  */
 function playFor(aPerformance){
@@ -99,7 +101,7 @@ function playFor(aPerformance){
 
 /**
  * 공연 관람 비용 계산 함수
- * @param performance
+ * @param aPerformance
  * @returns {number}
  */
 function amountFor(aPerformance){
