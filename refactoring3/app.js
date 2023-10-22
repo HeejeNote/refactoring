@@ -71,20 +71,26 @@ function statement(invoice) {
     }
 
     function totalAmount(data){
+        // for문 -> 파이프라인 처리
+        return data.performances
+            .reduce((total, p) => total + p.amount, 0);
+        /*
         let result = 0;
         for (let performance of data.performances) {
             result += performance.amount;
         }
-        console.log('total :::', result);
         return result;
+        */
     }
 
     function totalVolumeCredits(data){
-        let result = 0;
-        for (let performance of data.performances) {
-            result += performance.volumeCredits;
-        }
-        return result;
+        return data.performances
+            .reduce((total,p) => total + p.volumeCredits, 0);
+        // let result = 0;
+        // for (let performance of data.performances) {
+        //     result += performance.volumeCredits;
+        // }
+        // return result;
     }
 }
 
