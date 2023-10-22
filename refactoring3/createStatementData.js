@@ -1,6 +1,8 @@
 const invoice = readJSONFile('invoices.json');
 const plays = readJSONFile('plays.json');
-export default function createStatementData(){
+
+// export default function createStatementData()
+export function createStatementData(){
     const result = {};
     result.customer = invoice[0].customer;
     result.performances = invoice[0].performances.map(enrichPerformance);
@@ -80,5 +82,5 @@ function readJSONFile(filePath) {
     }
 }
 
-
+// module.exports = createStatementData;
 
