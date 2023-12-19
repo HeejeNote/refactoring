@@ -1,69 +1,85 @@
 class Bird {
-    constructor(type){
-        this.type = type;
+    constructor(bird){
+        Object.assign(this, bird);
     }
 
-    state; 
+    get plumage(){
+        return "notFound";
+    }
 
-    get getPlumage(){
-        this.state = "normal";
-        return this.state;
+    get airSpeedVelocity(){
+        return null;
+    }
+
+}
+
+function createBird(bird){
+    switch(bird.type){
+        case 'europeanSwallow' :
+            return new EuropeanSwallow(bird);
+        case 'africanSwallow':
+            return new AfricanSwallow(bird);
+        case 'norwegianBlueParrot':
+            return new NorwegianBlueParrot(bird);
+        default:
+            return new Bird(bird);    
     }
 }
 
 class EuropeanSwallow extends Bird {
-    constructor(){
-        super("europeanSwallow");
+
+    get plumage(){
+        return "normal"
     }
 
-    get getPlumage(){
-        return super.plumage();
+    get airSpeedVelocity(){
+        return 35;
     }
 }
 
 class AfricanSwallow extends Bird {
-    constructor(){
-        super("africanSwallow");
+    
+    get plumage(){
+        return (this.numberOfCocounts > 2) ? "tired" : "normal";
     }
 
-    numberOfCocounts = 3 ;
-    state;
-
-    get getPlumage(){
-        this.state = (this.numberOfCocounts > 2) ? "tired" : "normal";
-        return this.state;
+    get airSpeedVelocity(){
+        return 40 - 2 * bird.numberOfCocounts;
     }
-} 
+}
 
 class NorwegianBlueParrot extends Bird {
-    constructor(){
-        super("norwegianBlueParrot");
+    
+    get plumage(){
+        return (this.voltage > 100) ? "darked" : "beautiful"
     }
 
-    voltage = 120;
-    state;
-
-    get getPlumage(){
-        this.state = (this.voltage > 100) ? "darked" : "beautiful"
-        return this.state;
+    get airSpeedVelocity(){
+        return (bird.isNailed) ? 0 : 10 + bird.voltage / 10;
     }
+    
 }
 
-let birdType = "africanSwallow";
-let bird = new Bird(birdType);
-let europeanSwallow = new EuropeanSwallow(birdType);
-let africanSwallow = new AfricanSwallow(birdType);
-let norwegianBlueParrot = new NorwegianBlueParrot(birdType);
-console.log('type ::: ' + bird.type);
+// function plumage(bird){
+//     return new Bird(bird).plumage;
+// }
 
-switch(bird.type){
-    case 'europeanSwallow':
-        return europeanSwallow.getPlumage; // get Method는 속성처럼 접근한다.
-    case 'africanSwallow':
-        return africanSwallow.getPlumage;
-    case 'norwegianBlueParrot':
-        return norwegianBlueParrot.getPlumage;
-    default:
-        return "notFound";
+// function plumage(bird){
+//     return new createBird(bird).plumage;
+// }
+
+// function airSpeedVelocity(bird){
+//     return new Bird(bird).airSpeedVelocity;
+// }
+
+// function airSpeedVelocity(bird){
+//     return new createBird(bird).airSpeedVelocity;
+// }
+
+function plumage(birds){
+    return new Map(birds.map(b => createBird(b)).map(bird => [bird.name, bird.plumage]));
 }
 
+function speeds(birds){
+    return new Map(birds.map(b => createBird(b)).map(bird => [bird.name, bird.airSpeedVelocity]));
+}
